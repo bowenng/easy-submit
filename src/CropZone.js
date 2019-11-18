@@ -2,6 +2,7 @@ import React from 'react';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import ToolBar from './ToolBar.js';
+import ToolButton from './ToolButton';
 
 class CropZone extends React.Component{
     constructor(props){
@@ -35,6 +36,7 @@ class CropZone extends React.Component{
     handleOnClick = (buttonId) => {
         this.setState((prevState, prevProps)=>{
             var activeButton = prevState.activeButton === buttonId ? null : buttonId;
+            console.log(activeButton);
             return { activeButton: activeButton }
         })
     }
@@ -53,10 +55,16 @@ class CropZone extends React.Component{
     render(){
         return (
             <div className="crop-zone">
-                <ToolBar  onClick={this.handleOnClick} 
-                          activeButton={this.state.activeButton}
-                          resetCrop={this.resetCrop}
-                />
+                <ToolBar >
+                    <ToolButton toolName="Crop"
+                        icon="fas fa-crop"
+                        isActive={this.state.activeButton === "Crop"}
+                        onClick={(buttonId) => {
+                            this.resetCrop();
+                            this.handleOnClick(buttonId);
+                        }}
+                    />
+                </ToolBar>
                 <ReactCrop src={this.props.imgSrc} crop={this.state.crop} onChange={this.handleOnChange} disabled={this.state.activeButton !== "Crop"} />
             </div>
             
