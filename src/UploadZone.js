@@ -48,4 +48,4 @@ class UploadZone extends React.Component {
     }
 }
 
-export {UploadZone};
+export default UploadZone;
