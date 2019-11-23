@@ -17,12 +17,11 @@ class App extends React.Component {
         this.getPreview = this.getPreview.bind(this);
     }
 
-    addImage(image) {
-        this.setState((prevState, prevProps) => {
+    addImage(image){
+        this.setState((prevState, prevProps)=>{
             const images = prevState.images.slice();
             images.push(image);
-
-            return { images: images };
+            return {images:images};
         })
     }
 
