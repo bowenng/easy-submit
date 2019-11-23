@@ -31,6 +31,8 @@ class CropZone extends React.Component {
         this.handleOnChange = this.handleOnChange.bind(this);
         this.handleOnAdd = this.handleOnAdd.bind(this);
         this.resetCrop = this.resetCrop.bind(this);
+        this.handleOnImageLoaded = this.handleOnImageLoaded.bind(this);
+        this.imageRef = null;
     }
 
 
@@ -38,6 +40,11 @@ class CropZone extends React.Component {
         this.setState({ crop });
     };
 
+    handleOnImageLoaded = image => {
+        console.log(image);
+        
+        this.imageRef = image;
+    }
 
     resetCrop = () => {
         this.setState((prevState, prevProps) => {
@@ -53,7 +60,7 @@ class CropZone extends React.Component {
     }
 
     handleOnAdd = ()=>{
-        createImageData(this.props.imgSrc, this.state.crop, "untitled").then((imageData) => {
+        createImageData(this.imageRef, this.state.crop, "untitled").then((imageData) => {
             this.props.addImage(imageData)
         });
     }
@@ -66,21 +73,19 @@ class CropZone extends React.Component {
                         toolName="Crop"
                         icon="fas fa-crop"
                         isActive={this.state.isCropActive}
-                        onClick={this.resetCrop
-                        }
+                        onClick={this.resetCrop}
                     />
                     <ToolButton
                         toolName="Add"
                         icon=""
-                        onClick={
-                            this.handleOnAdd
-                        }
+                        onClick={this.handleOnAdd}
                     />
                 </ToolBar>
                 <ReactCrop
                     src={this.props.imgSrc}
                     crop={this.state.crop}
                     onChange={this.handleOnChange}
+                    onImageLoaded={this.handleOnImageLoaded}
                     disabled={!this.state.isCropActive}
                 />
             </div>

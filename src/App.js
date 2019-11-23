@@ -12,10 +12,10 @@ class App extends React.Component {
         this.updateOrder = this.updateOrder.bind(this);
     }
 
-    addImage(imageUrl){
+    addImage(image){
         this.setState((prevState, prevProps)=>{
             const images = prevState.images.slice();
-            images.push(imageUrl);
+            images.push(image);
             return {images:images};
         })
     }
