@@ -1,6 +1,6 @@
 import React from 'react';
 import ImageEditor from './ImageEditor.js';
-import PreviewList from './PreviewList.js';
+import {download} from './download.js'
 
 class App extends React.Component {
     constructor(props){
@@ -16,7 +16,6 @@ class App extends React.Component {
         this.setState((prevState, prevProps)=>{
             const images = prevState.images.slice();
             images.push(imageUrl);
-            
             return {images:images};
         })
     }
@@ -24,7 +23,6 @@ class App extends React.Component {
     removeImage(i){
         this.setState((prevState, prevProps)=>{
             const images = prevState.images.slice();
-            
             return { images: images };
         })
     }
@@ -35,18 +33,16 @@ class App extends React.Component {
     render () {
         const images = this.state.images;
         const previews = images.map(
-            (imageUrl, i) => (<li>
-                <img key={i} src={imageUrl} alt="none"/>
+            (imageData, i) => (<li>
+                <img key={i} src={imageData.src} alt="none"/>
              </li>)
         );
-        console.log(previews);
         
         return (
           <div className="App">
               <main className="container">
                   <div className="split left">
                       <ol>
-
                             {previews}
                       </ol>
                   </div>
