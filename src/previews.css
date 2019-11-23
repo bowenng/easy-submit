@@ -1,40 +1,40 @@
-.carousel{
-    width:90% !important;
-}
+
 
 .split.left{
     display: flex;
-    align-items: center;
+    vertical-align: top;
     justify-content: center;
-    background-color: #2f3542;
+    background-color:white;
 }
 
-/* .previews.container{
+.previews{   
     padding:3%;
+    height: 20%;
+    width: 100%;
     text-align: left;
     background-color: black;
     overflow-x: auto;
     overflow-y: hidden; 
     white-space: nowrap;
-} */
+} 
 
-/* .preview.block.out{
-    margin: 1%;
+.preview.block.out{
+    margin: 0%;
     display: inline-block;
-    width:20%;
-    height:100%;
+    width:30%;
+    height:80%;
 }
 
-*/
+
 
 .preview.block.in{
-    margin: 0%;
+    margin: 5%;
     display: inline-block;
     width:100%;
     height:100%;
 } 
 
-/* .preview{
+.preview{
     width:100%;
     height:100%;
-}  */
+} 

@@ -1,11 +1,8 @@
 import React from 'react';
 import ImageEditor from './ImageEditor.js';
-import Preview from './Preview.js';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import ReactDOM from 'react-dom';
-import { Carousel } from 'react-responsive-carousel';
-//import PreviewList from './PreviewList.js';
-import {download} from './download.js'
+import Preview from './Preview.js';
+import { download } from './download.js'
 
 class App extends React.Component {
     constructor(props) {
@@ -16,12 +13,14 @@ class App extends React.Component {
 
         this.addImage = this.addImage.bind(this);
         this.updateOrder = this.updateOrder.bind(this);
+        //this.handleChange = this.handleChange.bind(this);
+        this.getPreview = this.getPreview.bind(this);
     }
 
-    addImage(imageUrl) {
+    addImage(image) {
         this.setState((prevState, prevProps) => {
             const images = prevState.images.slice();
-            images.push(imageUrl);
+            images.push(image);
 
             return { images: images };
         })
@@ -37,26 +36,20 @@ class App extends React.Component {
         this.setState({ images: newImages })
     }
 
-    handlePreviewClick(index) {
-        const list = [...this.state.images]
-        this.setState({
-            preview: [list[index]]
-        })
-    }
-
-
-    updateCurrentSlide(index) {
-        const currentSlide = this.state.currentSlide;
-
-        if (currentSlide !== index) {
-            this.setState({
-                currentSlide: index,
-            });
-        }
-    }
-
-
     getPreview() {
+        return (
+            this.state.images.map((imageData, i) => {
+                return (
+                    <div className="preview block in">
+                        <Preview src={imageData.src} alt={imageData.fileName}/>
+                    </div>
+
+                )
+            })
+        );
+    }
+
+    handleClick(){
 
     }
 
@@ -65,23 +58,11 @@ class App extends React.Component {
             <div className="App">
                 <main className="container">
                     <div className="split left">
-                        
-                        <Carousel emulateTouch = {true} className = "carousel">
-                                {
-                                    this.state.images.map((imageData, i) => {
-                                        return (
-                                            <div className="preview block in">
-                                                <img class="preview" src={imageData.src} alt={imageData.fileName}  />
-                                                <input className="legend" type="text" value={imageData.fileName}/>
-                                            </div>
-
-                                        )
-                                    })
-                                }
-                            </Carousel>
-                                                       
-                            
-                       
+                        <div className = "previews">
+                            <div className = "preview block out">
+                                {this.getPreview()}
+                            </div>
+                        </div>
                     </div>
                     <div className="split right">
                         <ImageEditor addImage={this.addImage} />
