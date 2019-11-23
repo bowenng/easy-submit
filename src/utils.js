@@ -1,4 +1,6 @@
-export function getCroppedImg(imageUrl, crop, fileName) {
+import ImageData from './ImageData.js';
+
+function getCroppedImgCanvas(imageUrl, crop) {
     return new Promise((resolve, reject) => {
         const image = new Image();
         image.onload = () => {
@@ -20,20 +22,64 @@ export function getCroppedImg(imageUrl, crop, fileName) {
                 crop.width,
                 crop.height,
             );
-            // As Base64 string
-            const base64Image = canvas.toDataURL('image/jpeg');
-            resolve(base64Image);
-            // As a blob
-            // return new Promise((resolve, reject) => {
-            //     canvas.toBlob(blob => {
-            //         blob.name = fileName;
-            //         resolve(blob);
-            //     }, 'image/jpeg', 1);
-            // });
+
+            resolve(canvas)
         }
         image.src = imageUrl;
-
-        
     })
+}
+
+
+
+export function getCroppedImgDataUrl(imageUrl, crop){
+    return getCroppedImgCanvas(imageUrl, crop).then(
+        (canvas)=>{
+            return dataUrlExecutor(canvas);
+    });
+}
+
+export function getCroppedImgBlob(imageUrl, crop){
+    return getCroppedImgCanvas(imageUrl, crop).then((canvas)=>{
+        return blobExecutor(canvas);
+    })
+}
+
+export function createImageData(imageUrl, crop, fileName){
+    console.log("creating image data");
     
+    const canvasPromise = getCroppedImgCanvas(imageUrl, crop);
+    const dataUrlPromise = 
+    canvasPromise.then((canvas)=>{
+        return dataUrlExecutor(canvas);
+    });
+    const blobPromise = 
+    canvasPromise.then((canvas)=>{
+        return blobExecutor(canvas);
+    });
+    return Promise.all([dataUrlPromise, blobPromise]).then(([imgUrl, imgBlob])=>{
+        
+        return new Promise((resolve, reject)=>{
+            const imageData = new ImageData(imgUrl, imgBlob, fileName);
+            resolve(imageData);
+        });
+    });
+}
+
+const dataUrlExecutor = (canvas) => {
+    return new Promise((resolve, reject) => {
+        const base64Image = canvas.toDataURL('image/jpeg');
+        resolve(base64Image);
+    });
+} 
+
+const blobExecutor = (canvas) => {
+    return new Promise((resolve, reject) => {
+        
+        
+        canvas.toBlob(blob => {
+            //blob.name = fileName;
+            resolve(blob);
+        }, 'image/jpeg', 1);
+        
+    });
 }

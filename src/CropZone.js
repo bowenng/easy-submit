@@ -6,7 +6,8 @@ import 'react-image-crop/dist/ReactCrop.css';
 import ToolBar from './ToolBar.js';
 import ToolButton from './ToolButton';
 
-import {getCroppedImg} from './utils.js';
+import { createImageData } from './utils.js';
+
 
 class CropZone extends React.Component {
     constructor(props) {
@@ -28,6 +29,7 @@ class CropZone extends React.Component {
             isCropActive: false
         }
         this.handleOnChange = this.handleOnChange.bind(this);
+        this.handleOnAdd = this.handleOnAdd.bind(this);
         this.resetCrop = this.resetCrop.bind(this);
     }
 
@@ -50,6 +52,11 @@ class CropZone extends React.Component {
         });
     }
 
+    handleOnAdd = ()=>{
+        createImageData(this.props.imgSrc, this.state.crop, "untitled").then((imageData) => {
+            this.props.addImage(imageData)
+        });
+    }
 
     render() {
         return (
@@ -66,15 +73,7 @@ class CropZone extends React.Component {
                         toolName="Add"
                         icon=""
                         onClick={
-                            () => {
-
-                                getCroppedImg(this.props.imgSrc, this.state.crop, "untitled").then(
-                                    (croppedImgUrl) => {
-                                        
-                                        this.props.addImage(croppedImgUrl);
-                                    }
-                                )
-                            }
+                            this.handleOnAdd
                         }
                     />
                 </ToolBar>

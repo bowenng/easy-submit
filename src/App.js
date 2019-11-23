@@ -5,6 +5,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import ReactDOM from 'react-dom';
 import { Carousel } from 'react-responsive-carousel';
 //import PreviewList from './PreviewList.js';
+import {download} from './download.js'
 
 class App extends React.Component {
     constructor(props) {
@@ -29,7 +30,6 @@ class App extends React.Component {
     removeImage(i) {
         this.setState((prevState, prevProps) => {
             const images = prevState.images.slice();
-
             return { images: images };
         })
     }
@@ -68,11 +68,11 @@ class App extends React.Component {
                         
                         <Carousel emulateTouch = {true} className = "carousel">
                                 {
-                                    this.state.images.map((imageUrl, i) => {
+                                    this.state.images.map((imageData, i) => {
                                         return (
                                             <div className="preview block in">
-                                                <img class="preview" src={imageUrl} alt={"none"}  />
-                                                <input className="legend" type="text"/>
+                                                <img class="preview" src={imageData.src} alt={imageData.fileName}  />
+                                                <input className="legend" type="text" value={imageData.fileName}/>
                                             </div>
 
                                         )
