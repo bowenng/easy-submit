@@ -59,10 +59,10 @@ class App extends React.Component {
         this.setState({ previewing: index })
     }
 
-    handleLeft(){
+    handleLeft() {
         const previewing = this.state.previewing;
-        if(previewing - 1 !== -1){
-            this.setState({previewing:previewing-1})
+        if (previewing - 1 !== -1) {
+            this.setState({ previewing: previewing - 1 })
         }
     }
 
@@ -78,15 +78,15 @@ class App extends React.Component {
             const imageData = this.state.images[this.state.previewing]
             return (
                 <div className="inner">
-                    <div className="left_arrow" onClick={this.handleLeft}>
-                        <i className="far fa-caret-square-left"></i>
-                    </div>
                     < img className="previewing" src={imageData.src} alt={imageData.alt} />
-                    <div className="right_arrow" onClick={this.handleRight}>
-                        <i className="far fa-caret-square-right"></i>
-                    </div>
                 </div>
             )
+        }else{
+            return (
+                <div className="inner">
+                    < img className="previewing" src="welcome.jpg" alt="loading"/>
+                </div>
+            ) 
         }
     }
 
@@ -96,20 +96,28 @@ class App extends React.Component {
                 <img src="title.png" alt="title" className="title"></img>
                 <main className="container">
                     <CropZone className="split left editor-panel" addImage={this.addImage} />
-                    
+
 
                     <div className="split right preview-panel">
-                        
+
                         <div className="large">
                             {this.showPreview()}
                         </div>
-                        <div className="previews">
-                            <div className="out">
-                                {this.getPreview()}
+                        <div className="preview-bar">
+                            <div className="left_arrow" onClick={this.handleLeft}>
+                                <i className="fas fa-caret-left"></i>
+                            </div>
+                            <div className="previews">
+                                <div className="out">
+                                    {this.getPreview()}
+                                </div>
+                            </div>
+                            <div className="right_arrow" onClick={this.handleRight}>
+                                <i className="fas fa-caret-right"></i>
                             </div>
                         </div>
                     </div>
-                    
+
                 </main>
 
             </div>

@@ -3,25 +3,24 @@
 .preview-panel{
     display: flex;
     justify-content: center;
-    background-color:white;
+    background-color:var(background-color);
     display: table-cell;
     box-sizing: border-box;
     border: 5px solid var(--black-pearl);
 }
 
 .previews{   
+    margin-top: 1%;
     padding-top:1%;
-    padding-bottom: 3%;
-    height: 15%;
+    height: 100px;
     width: 100%;
     text-align: left;
-    background-color: #2c3e50;
+    background-color: white;
     overflow-x: auto;
     overflow-y: hidden; 
     white-space: nowrap;
     display: inline-block;
-    box-shadow: 5px 5px 5px grey;
-    
+    border: 5px solid var(--border-color);
 } 
 
 .preview:hover{
@@ -30,18 +29,27 @@
 }
 
 .large{
-    height: 80%;
-    width: 100%;
+    max-height: 80%;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
+    background-color: white;
+    border: 5px solid var(--border-color);
+    padding: 1%;
 }
 
 .inner{
-    width: 100%;
+    width: 90%;
     height: 100%;
+    text-align: center;
+    align-items: center;
+    background-color: white;
+}
+
+.preview-bar{
     display: flex;
     flex-direction: row;
     text-align: center;
@@ -52,10 +60,9 @@
 .left_arrow{
     color: var(--black-pearl);
     cursor: pointer;
-    
     margin-right: 6px;
     height: 20%;
-    width: 10%;
+    width: 5%;
     display: flex;
     flex-direction: row;
     text-align: center;
@@ -66,7 +73,7 @@
 
 
 .previewing{
-    width: 70%;
+    width: 80%;
     display: inline-block;
     margin-right: 6px;
 }
@@ -77,7 +84,7 @@
     cursor: pointer;
     margin-right: 6px;
     height: 20%;
-    width: 10%;
+    width: 5%;
     display: flex;
     flex-direction: row;
     text-align: center;
@@ -85,8 +92,14 @@
     justify-content: center;
 }
 
-.far{
-    font-size: 45px;
+.fa-caret-right{
+    font-size: 80px;
+    color: var(--button-color);
+}
+
+.fa-caret-left{
+    font-size: 80px;
+    color: var(--button-color);
 }
 
 .left_arrow:hover {
@@ -104,8 +117,8 @@
 .out{
     margin: 0%;
     display: inline-block;
-    width:30%;
-    height:100%;
+    width:170px;
+    height:90px;
 }
 
 
@@ -118,7 +131,7 @@
 
 .preview{
     width: 100%;
-    height: 80%;
+    max-height: 80%;
     cursor: pointer;
 }
 
@@ -128,7 +141,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  border-radius: 5px;
-  background-color: rgba(0,0,0,.5);
+  border-radius: 10px;
+  background-color: var(--button-color);
   -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
 }

@@ -97,7 +97,19 @@ class CropZone extends React.Component {
                     />
                     <ToolButton className="tool-btn"
                         toolName="Add"
-                        icon="fas fa-plus-square"
+                        icon="fas fa-plus-circle"
+                        onClick={this.handleOnAdd}
+                    />
+
+                    <ToolButton className="tool-btn"
+                        toolName="Add"
+                        icon="fas fa-minus-circle"
+                        onClick={this.handleOnAdd}
+                    />
+
+                    <ToolButton className="tool-btn"
+                        toolName="Add"
+                        icon="fas fa-arrow-circle-down"
                         onClick={this.handleOnAdd}
                     />
                 </ToolBar>

@@ -1,7 +1,10 @@
 :root {
-  --pretige-blue : #2c3e50;
-  --tomato-orange: #ff6348;
-  --black-pearl: #1e272e;
+  --outer-background-color : #424242;
+  --inner-background-color : white;
+  --button-color: #E68E67;
+  --border-color: #56657F;
+  --message-color: lightgrey;
+
 }
 
 .title{
@@ -9,7 +12,7 @@
   padding: 1%;
   text-align: right;
   width: 30%;
-  background-color: #424242;
+  background-color: var(--outer-background-color);
   z-index: 1;
 }
 
@@ -26,6 +29,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background:var(--outer-background-color);
 }
 
 code {
@@ -48,7 +52,8 @@ code {
   text-align: center;
   color : gray;
   font-size: 50px;
-  border: 5px solid var(--black-pearl);
+  border: 5px solid var(--border-color);
+  background: var(--inner-background-color);
 }
 
 .upload-area{
@@ -65,7 +70,7 @@ code {
 
 .upload-icon{
   font-size: 100px;
-  background: var(--tomato-orange);
+  background: var(--button-color);
   text-align: center;
   line-height: 200px !important;
   width: 200px;
@@ -76,7 +81,7 @@ code {
 
 .upload-area:hover .upload-icon{
   background: none;
-  color: var(--tomato-orange);
+  color: var(--button-color);
   transform: scale(1.6);
   
 }
@@ -88,16 +93,17 @@ code {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: var(--pretige-blue);
+  background-color: var(--border-color);
+  transform: skewY(10deg);
+  padding: 10%;
 }
 
 
 /* tool button */
 .tool-btn {
-  color: white;
-  background-color: var(--pretige-blue);
-  padding: 3px;
-  margin: 2px;
+  color: var(--button-color);
+  background-color: var(--border-color);
+  padding-top: 10px;
   outline:0;
 }
 
@@ -109,24 +115,25 @@ code {
 /* tool icon */
 .tool-icon {
   text-align: center;
-  line-height: 35px !important;
-  font-size: 28px;
-  width: 35px;
-  height: 35px;
+  line-height: 38px !important;
+  font-size: 38px;
+  width: 40px;
+  height: 40px;
   transition: 0.1s linear;
+  transform: skewY(-10deg);
+  padding: 5%;
 }
 
 .tool-btn:hover {
   cursor: pointer;
-  background: var(--black-pearl);
-  color: var(--tomato-orange);
-  border-radius: 50%;
+  color:#EF6C00;
+  background: lightgray;
+
 }
 
 .tool-btn.active{
-  background: var(--black-pearl);
-  color: var(--tomato-orange);
-  border-radius: 50%;
+  color:#EF6C00;
+  background: lightgray;
 }
 
 /* image editor */
@@ -139,7 +146,7 @@ code {
 
 /*react crop area*/
 .react-crop{
-  border: 5px solid var(--black-pearl);
+  border: 5px solid var(--border-color);
 }
 
 /* crop zone*/
@@ -162,6 +169,7 @@ code {
   grid-column-end: 2;
   grid-row-start: 1;
   grid-row-end: 2;
+
 }
 
 /* Main */
@@ -175,8 +183,8 @@ code {
   transform: translate(-50%, -50%);
 
   display: grid;
-  grid-template-columns: 60% auto;
-  grid-template-rows: 17% auto 17%;
+  grid-template-columns: 50% auto;
+  grid-template-rows: 13% auto 13%;
 }
 
 .split.left {
