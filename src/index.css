@@ -4,6 +4,15 @@
   --black-pearl: #1e272e;
 }
 
+.title{
+  float: right;
+  padding: 1%;
+  text-align: right;
+  width: 30%;
+  background-color: #424242;
+  z-index: 1;
+}
+
 /* btn */
 button {
   border-style: none;

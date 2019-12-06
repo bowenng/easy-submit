@@ -92,6 +92,7 @@ class App extends React.Component {
     render() {
         return (
             <div className="App">
+                <img src="title.png" alt="title" className="title"></img>
                 <main className="container">
                     <div className="split left">
                         <div className="previews">
