@@ -22,9 +22,10 @@ class ImageEditor extends React.Component{
     
 
     render() {
+        const className = "image-editor " + this.props.className;
         return (
             
-            <div className="image-editor">
+            <div className={className}>
                 {
                    this.state.imgSrc == null? 
                    <UploadZone onUpload={this.updateImageSrc}/> : 

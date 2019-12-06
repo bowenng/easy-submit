@@ -3,6 +3,7 @@ import ImageEditor from './ImageEditor.js';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Preview from './Preview.js';
 import { download } from './download.js'
+import CropZone from './CropZone.js';
 
 class App extends React.Component {
     constructor(props) {
@@ -94,19 +95,21 @@ class App extends React.Component {
             <div className="App">
                 <img src="title.png" alt="title" className="title"></img>
                 <main className="container">
-                    <div className="split left">
+                    <CropZone className="split left editor-panel" addImage={this.addImage} />
+                    
+
+                    <div className="split right preview-panel">
+                        
+                        <div className="large">
+                            {this.showPreview()}
+                        </div>
                         <div className="previews">
                             <div className="out">
                                 {this.getPreview()}
                             </div>
                         </div>
-                        <div className="large">
-                            {this.showPreview()}
-                        </div>
                     </div>
-                    <div className="split right">
-                        <ImageEditor addImage={this.addImage} />
-                    </div>
+                    
                 </main>
 
             </div>

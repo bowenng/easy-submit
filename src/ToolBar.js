@@ -4,7 +4,8 @@ class ToolBar extends React.Component{
 
     render() {
         return(
-            <div className="tool-bar">
+            
+            <div className={this.props.className}>
                 {this.props.children}
             </div>
         );
