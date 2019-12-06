@@ -2,6 +2,7 @@ import React from 'react';
 import ImageEditor from './ImageEditor.js';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
+import uniqueId from 'lodash/uniqueId';
 import {download} from './download.js'
 
 class App extends React.Component {
@@ -64,11 +65,11 @@ class App extends React.Component {
                         
                         <Carousel emulateTouch = {true} className = "carousel">
                                 {
-                                    this.state.images.map((imageData, i) => {
+                                    this.state.images.map((imageData) => {
                                         return (
-                                            <div className="preview block in">
-                                                <img class="preview" src={imageData.src} alt={imageData.fileName}  />
-                                                <input className="legend" type="text" value={imageData.fileName}/>
+                                            <div className="preview block in" key={uniqueId()}>
+                                                <img className="preview" src={imageData.src} alt={imageData.fileName}  />
+                                                <input className="legend" type="text" value={imageData.fileName} />
                                             </div>
 
                                         )
