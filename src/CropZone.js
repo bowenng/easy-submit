@@ -6,6 +6,8 @@ import 'react-image-crop/dist/ReactCrop.css';
 import ToolBar from './ToolBar.js';
 import ToolButton from './ToolButton';
 
+import UploadZone from './UploadZone.js'
+
 import { createImageData } from './utils.js';
 
 
@@ -26,15 +28,20 @@ class CropZone extends React.Component {
             crop: {
                 unit: 'px' // default, can be 'px' or '%'
             },
-            isCropActive: false
+            isCropActive: false,
+            imgSrc: null
         }
         this.handleOnChange = this.handleOnChange.bind(this);
         this.handleOnAdd = this.handleOnAdd.bind(this);
         this.resetCrop = this.resetCrop.bind(this);
         this.handleOnImageLoaded = this.handleOnImageLoaded.bind(this);
         this.imageRef = null;
+        this.updateImageSrc = this.updateImageSrc.bind(this);
     }
 
+    updateImageSrc(imgSrc) {
+        this.setState({ imgSrc });
+    }
 
     handleOnChange = (crop) => {
         this.setState({ crop });
@@ -66,16 +73,21 @@ class CropZone extends React.Component {
     }
 
     render() {
+        const className = "crop-zone " + this.props.className;
         return (
-            <div className="crop-zone">
+            <div className={className}>
+                {
+                    this.state.imgSrc == null ?
+                        <UploadZone onUpload={this.updateImageSrc} /> : 
+                        <ReactCrop className="left react-crop"
+                            src={this.state.imgSrc}
+                            crop={this.state.crop}
+                            onChange={this.handleOnChange}
+                            onImageLoaded={this.handleOnImageLoaded}
+                            disabled={!this.state.isCropActive}
+                        />
+                }
                 
-                <ReactCrop className="left react-crop"
-                    src={this.props.imgSrc}
-                    crop={this.state.crop}
-                    onChange={this.handleOnChange}
-                    onImageLoaded={this.handleOnImageLoaded}
-                    disabled={!this.state.isCropActive}
-                />
                 <ToolBar className="tool-bar right">
                     <ToolButton className="tool-btn"
                         toolName="Crop"
