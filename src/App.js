@@ -8,20 +8,24 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            images: []
+            images: [],
+            previewing: -1
         }
 
         this.addImage = this.addImage.bind(this);
         this.updateOrder = this.updateOrder.bind(this);
-        //this.handleChange = this.handleChange.bind(this);
+        this.handleClick = this.handleClick.bind(this);
         this.getPreview = this.getPreview.bind(this);
+        this.showPreview = this.showPreview.bind(this);
+        this.handleLeft = this.handleLeft.bind(this);
+        this.handleRight = this.handleRight.bind(this);
     }
 
-    addImage(image){
-        this.setState((prevState, prevProps)=>{
+    addImage(image) {
+        this.setState((prevState, prevProps) => {
             const images = prevState.images.slice();
             images.push(image);
-            return {images:images};
+            return { images: images };
         })
     }
 
@@ -39,17 +43,50 @@ class App extends React.Component {
         return (
             this.state.images.map((imageData, i) => {
                 return (
-                    <div className="preview block in">
-                        <Preview src={imageData.src} alt={imageData.fileName}/>
-                    </div>
-
+                    <Preview
+                        src={imageData.src}
+                        alt={imageData.fileName}
+                        index={i}
+                        onClick={this.handleClick}
+                    />
                 )
             })
         );
     }
 
-    handleClick(){
+    handleClick(index) {
+        this.setState({ previewing: index })
+    }
 
+    handleLeft(){
+        const previewing = this.state.previewing;
+        if(previewing - 1 !== -1){
+            this.setState({previewing:previewing-1})
+        }
+    }
+
+    handleRight() {
+        const previewing = this.state.previewing;
+        if (previewing + 1 !== this.state.images.length) {
+            this.setState({ previewing: previewing + 1 })
+        }
+    }
+
+    showPreview() {
+        if (this.state.previewing !== -1) {
+            const imageData = this.state.images[this.state.previewing]
+            return (
+                <div className="inner">
+                    <div className="left_arrow" onClick={this.handleLeft}>
+                        <i className="far fa-caret-square-left"></i>
+                    </div>
+                    < img className="previewing" src={imageData.src} alt={imageData.alt} />
+                    <div className="right_arrow" onClick={this.handleRight}>
+                        <i className="far fa-caret-square-right"></i>
+                    </div>
+                </div>
+            )
+        }
     }
 
     render() {
@@ -57,10 +94,13 @@ class App extends React.Component {
             <div className="App">
                 <main className="container">
                     <div className="split left">
-                        <div className = "previews">
-                            <div className = "preview block out">
+                        <div className="previews">
+                            <div className="out">
                                 {this.getPreview()}
                             </div>
+                        </div>
+                        <div className="large">
+                            {this.showPreview()}
                         </div>
                     </div>
                     <div className="split right">
