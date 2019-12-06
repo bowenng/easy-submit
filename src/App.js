@@ -93,19 +93,21 @@ class App extends React.Component {
         return (
             <div className="App">
                 <main className="container">
-                    <div className="split left">
+                    <ImageEditor className="split left editor-panel" addImage={this.addImage} />
+                    
+
+                    <div className="split right preview-panel">
+                        
+                        <div className="large">
+                            {this.showPreview()}
+                        </div>
                         <div className="previews">
                             <div className="out">
                                 {this.getPreview()}
                             </div>
                         </div>
-                        <div className="large">
-                            {this.showPreview()}
-                        </div>
                     </div>
-                    <div className="split right">
-                        <ImageEditor addImage={this.addImage} />
-                    </div>
+                    
                 </main>
 
             </div>

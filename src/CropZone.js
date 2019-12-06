@@ -68,28 +68,28 @@ class CropZone extends React.Component {
     render() {
         return (
             <div className="crop-zone">
-                <ToolBar >
-                    <ToolButton
-                        toolName="Crop"
-                        icon="fas fa-crop"
-                        isActive={this.state.isCropActive}
-                        onClick={this.resetCrop}
-                    />
-                    <ToolButton
-                        toolName="Add"
-                        icon="fas fa-plus-square"
-                        onClick={this.handleOnAdd}
-                    />
-                </ToolBar>
-                <ReactCrop
+                
+                <ReactCrop className="left react-crop"
                     src={this.props.imgSrc}
                     crop={this.state.crop}
                     onChange={this.handleOnChange}
                     onImageLoaded={this.handleOnImageLoaded}
                     disabled={!this.state.isCropActive}
                 />
+                <ToolBar className="tool-bar right">
+                    <ToolButton className="tool-btn"
+                        toolName="Crop"
+                        icon="fas fa-crop"
+                        isActive={this.state.isCropActive}
+                        onClick={this.resetCrop}
+                    />
+                    <ToolButton className="tool-btn"
+                        toolName="Add"
+                        icon="fas fa-plus-square"
+                        onClick={this.handleOnAdd}
+                    />
+                </ToolBar>
             </div>
-
         );
     }
 }
